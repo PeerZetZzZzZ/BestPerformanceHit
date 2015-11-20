@@ -4,7 +4,8 @@ import subprocess
 
 class ReaderAndParser:
 
-    hostmaps = {}
+    hostlist = []
+    timelist = []
 
     def read(self, list_host, resource_to_download):
          i = 0
@@ -32,7 +33,9 @@ class ReaderAndParser:
             if words[i].decode("utf-8") == str(n):
                 li.append(words[i + 2].decode("utf-8"))
                 li.append(words[i + 3].decode("utf-8"))
-                self.hostmaps[words[i + 2].decode("utf-8")] = words[i + 3].decode("utf-8")
+                # self.hostmaps[words[i + 2].decode("utf-8")] = words[i + 3].decode("utf-8")
+                self.hostlist.append(words[i + 2].decode("utf-8"))
+                self.timelist.append(words[i + 3].decode("utf-8"))
                 n += 1
             i += 1
         print(li)
@@ -46,20 +49,27 @@ class ReaderAndParser:
 
     def getHostFromPosition(self, position):
         print("getHostFromPosition")
-        print(self.hostmaps.keys()[position])
-        return self.hostmaps.keys()[position]
+        print(self.hostlist[position])
+        # print(self.hostmaps.keys()[position])
+        # return self.hostmaps.keys()[position]
 
     def getTimeToHost(self, position):
         print("getTimeToHost")
-        print(self.hostmaps.values()[position])
-        return self.hostmaps.values()[position]
+        print(self.timelist[position])
+
+        # print(self.hostmaps.values()[position])
+        # return self.hostmaps.values()[position]
 
     def getFullPathTime(self):
         print("getFullPathTime")
-        print(self.hostmaps.values()[len(self.hostmaps)-1])
-        return self.hostmaps.values()[len(self.hostmaps)-1]
+        print(self.timelist[-1])
 
-    def getSizeOfMap(self):
+        # print(self.hostmaps.values()[len(self.hostmaps)-1])
+        # return self.hostmaps.values()[len(self.hostmaps)-1]
+
+    def getSizeOfList(self):
         print("getSizeOfMap")
-        print(len(self.hostmaps))
-        return len(self.hostmaps)
+        print(len(self.timelist))
+
+        # print(len(self.hostmaps))
+        # return len(self.hostmaps)

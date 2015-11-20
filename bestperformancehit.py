@@ -19,10 +19,10 @@ class BestPerformanceHit:
                 list_host = single_host.split()
                 reader = readerandparser.ReaderAndParser()
                 reader.read(list_host, resource_to_download)
-                reader.getHostFromPosition(3)
+                reader.getHostFromPosition(6)
                 reader.getTimeToHost(6)
                 reader.getFullPathTime()
-                reader.getSizeOfMap()
+                reader.getSizeOfList()
 
                 # geo = geolocal.GeoLocal()
 
