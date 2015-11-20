@@ -48,28 +48,13 @@ class ReaderAndParser:
         f.close()
 
     def getHostFromPosition(self, position):
-        print("getHostFromPosition")
-        print(self.hostlist[position])
-        # print(self.hostmaps.keys()[position])
-        # return self.hostmaps.keys()[position]
+        return self.hostlist[position]
 
     def getTimeToHost(self, position):
-        print("getTimeToHost")
-        print(self.timelist[position])
-
-        # print(self.hostmaps.values()[position])
-        # return self.hostmaps.values()[position]
+        return self.timelist[position]
 
     def getFullPathTime(self):
-        print("getFullPathTime")
-        print(self.timelist[-1])
-
-        # print(self.hostmaps.values()[len(self.hostmaps)-1])
-        # return self.hostmaps.values()[len(self.hostmaps)-1]
+        return self.timelist[-1]
 
     def getSizeOfList(self):
-        print("getSizeOfMap")
-        print(len(self.timelist))
-
-        # print(len(self.hostmaps))
-        # return len(self.hostmaps)
+        return len(self.timelist)
