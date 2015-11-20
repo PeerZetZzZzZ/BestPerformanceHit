@@ -3,6 +3,9 @@
 import os
 import sys
 import subprocess
+import readerandparser
+# import geolocal
+
 class BestPerformanceHit:
 
     def process_file(self, input_file, resource_to_download):
@@ -11,17 +14,29 @@ class BestPerformanceHit:
             if len(single_host) == 0:
                 sys.exit()
             else:
-                self.__run_traceroute_paris_for_host(single_host, resource_to_download)
+                # self.__run_traceroute_paris_for_host(single_host, resource_to_download)
+
+                list_host = single_host.split()
+                reader = readerandparser.ReaderAndParser()
+                reader.read(list_host, resource_to_download)
+                reader.getHostFromPosition(3)
+                reader.getTimeToHost(6)
+                reader.getFullPathTime()
+                reader.getSizeOfMap()
+
+                # geo = geolocal.GeoLocal()
+
+
 
     # Params:
     # host_address - address of the host where resource to download is located
     # resource_to_download - name of resource to download which should be located under host_address/resource_to_download
-    def __run_traceroute_paris_for_host(self, host_address, resource_to_download):
-        traceroute_command = "{} {}".format("paris-traceroute", host_address).strip()
-        traceroute_process= subprocess.Popen(traceroute_command, stdout=subprocess.PIPE, shell=True)
-        traceroute_output = traceroute_process.stdout.read()
-        print(traceroute_output)
-        print(resource_to_download)
+    # def __run_traceroute_paris_for_host(self, host_address, resource_to_download):
+    #     traceroute_command = "{} {}".format("paris-traceroute", host_address).strip()
+    #     traceroute_process= subprocess.Popen(traceroute_command, stdout=subprocess.PIPE, shell=True)
+    #     traceroute_output = traceroute_process.stdout.read()
+    #     print(traceroute_output)
+    #     print(resource_to_download)
         #############################  PART 1  ##################################################################
         # Here is the place where traceroute_output should be processed and where appropriate object with data
         # should be returned
