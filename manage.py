@@ -2,9 +2,12 @@
 import os
 import sys
 
+from flask_script import Manager, Server
+
+from FileDownloadMonitor import FileDownloadMonitor
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from flask.ext.script import Manager, Server
 from bestperformancehit import app
 
 manager = Manager(app)
@@ -17,4 +20,5 @@ manager.add_command("runserver", Server(
 )
 
 if __name__ == "__main__":
+    FileDownloadMonitor.start_downloading_loop()
     manager.run()

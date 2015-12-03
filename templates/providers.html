@@ -1,8 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h1>Providers being analyzed:</h1>
+    <h1>Current providers list:</h1>
+ <table class="table">
+        <thead>
+          <tr>
+            <th><h3>Provider</h3></th>
+            <th><h3>Filepath</h3></th>
+            <th><h3>Filesize</h3></th>
+          </tr>
+        </thead>
+        <tbody>
     {% for file_provider in file_providers %}
-      <h2><a>{{ file_provider.hostname }}</a></h2>
+          <tr>
+            <td>{{file_provider.hostname}}</td>
+            <td>{{file_provider.filepath}}</td>
+            <td>{{file_provider.filesize}} kB</td>
+          </tr>
     {% endfor %}
+        </tbody>
+      </table>
 {% endblock %}

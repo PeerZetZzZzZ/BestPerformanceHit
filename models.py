@@ -20,16 +20,15 @@ class FileDownload(db.Document):
 
 class FileProvider(db.Document):
     created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
-    hostname = db.StringField(max_length=255, required=True)
-    filepath = db.StringField(required=True)
+    hostname = db.StringField(max_length=255, required=True, unique=True)
+    filepath = db.StringField(required=True, unique=True)
     filesize = db.StringField(max_length=255, required=True)
     downloads = db.ListField(db.EmbeddedDocumentField('FileDownload'))
 
-    # def get_absolute_url(self):
-    #     return url_for('filedownload', kwargs={"slug": self.slug})
-    #
-    # def __unicode__(self):
-    #     return self.filename
+    def add_new_file_provider(hostname, filepath, filesize):
+        file_provider = FileProvider(hostname=hostname, filepath=filepath, filesize=str(filesize))
+        file_provider.save()
+        # FileProvider.objects(hostname="net23").delete()
 
     meta = {
         'allow_inheritance': True,
