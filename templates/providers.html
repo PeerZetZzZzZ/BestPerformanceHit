@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Providers being analyzed:</h1>
+    {% for file_provider in file_providers %}
+      <h2><a>{{ file_provider.hostname }}</a></h2>
+    {% endfor %}
+{% endblock %}
