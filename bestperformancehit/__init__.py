@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_mongoengine import MongoEngine
 
+from FileDownloadMonitor import FileDownloadMonitor
+
 app = Flask(__name__)
 app.config["MONGODB_SETTINGS"] = {'DB': "my_bestperformancehit"}
 app.config["SECRET_KEY"] = "KeepThisS3cr3t"
@@ -8,7 +10,6 @@ app.config["SECRET_KEY"] = "KeepThisS3cr3t"
 db = MongoEngine(app)
 
 if __name__ == '__main__':
-    print("siemka")
     app.run()
 
 def register_blueprints(app):

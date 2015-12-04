@@ -20,6 +20,7 @@ class Utils:
 
     def fileSize(url):
         response = requests.head(url)
+        print("asking about head for file {}".format(url))
         file_size = response.headers.get('Content-Length')
         print(response.headers)
         return float(file_size)/1000
