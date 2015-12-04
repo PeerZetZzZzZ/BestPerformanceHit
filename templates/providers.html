@@ -8,6 +8,7 @@
             <th><h3>Provider</h3></th>
             <th><h3>Filepath</h3></th>
             <th><h3>Filesize</h3></th>
+            <th><h3>Downloads counter</h3></th>
             <th><h3>Average download time</h3></th>
           </tr>
         </thead>
@@ -17,6 +18,7 @@
             <td>{{file_provider.hostname}}</td>
             <td>{{file_provider.filepath}}</td>
             <td>{{file_provider.filesize}} kB</td>
+            <td>{{file_provider.get_downloads_counter()}}</td>
             <td>{{file_provider.get_average_download_time()}} s</td>
           </tr>
     {% endfor %}

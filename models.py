@@ -41,6 +41,9 @@ class FileProvider(db.Document):
             return round(total_time/counter, 4)
         return 0
 
+    def get_downloads_counter(self):
+        return len(self.downloads)
+
     meta = {
         'allow_inheritance': True,
         'ordering': ['-created_at']
