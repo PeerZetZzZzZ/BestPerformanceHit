@@ -1,0 +1,105 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+<head>
+    <title>BestPerformanceHit client</title>
+     <script type='text/javascript'>
+        function addFields(){
+            // Number of inputs to create
+            var number = document.getElementById("member").value;
+            // Container <div> where dynamic content will be placed
+            var container = document.getElementById("container");
+            // Clear previous contents of the container
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+            if(number > 10) {
+                var h3_error = document.createElement("h3");
+                var error_text = document.createTextNode("Number of resources can't be bigger than 10!");
+                h3_error.appendChild(error_text);
+                container.appendChild(h3_error);
+            } else {
+                if(number > 0) {
+                    var h3 = document.createElement("h3");
+                    var res_text = document.createTextNode("Please define resources you want to download:");
+                    h3.appendChild(res_text);
+                    container.appendChild(h3);
+                }
+                for (i=0;i<number;i++){
+                console.log("dupa");
+                    // Append a node with a random text
+                    var h4 = document.createElement("h4");
+                    var t = document.createTextNode("Resource " + (i+1));
+                    h4.appendChild(t);
+
+                    // Create an <input> element, set its type and name attributes
+                    var input = document.createElement("input");
+                    input.type = "text";
+                    input.name = "member" + i;
+                    input.id = "member" + i;
+                    input.className = "form-control";
+                    input.placeholder = "Resource";
+
+
+                    container.appendChild(input);
+                    container.appendChild(h4);
+                    container.appendChild(document.createElement("br"));
+                }
+                if(number > 0) {
+                    var download_button = document.createElement("button");
+                    var download_text = document.createTextNode("Download");
+                    download_button.className = "btn btn-primary navbar-btn";
+                    download_button.appendChild(download_text);
+                    download_button.onclick = function() {
+                        var resources_list = [];
+                        for (i=0;i<number;i++){
+                            var singleInput = document.getElementById("member"+i).value;
+                            resources_list.push(singleInput);
+                        }
+                        var json = {resources_list:resources_list};
+                        console.log(json);
+
+                          $.ajax({
+                              url: "/test",
+                              method: "POST",
+                              data: JSON.stringify(json),
+                              contentType: "application/json",
+                              success: function(data) {
+                                var winner_url = data;
+                                console.log(winner_url);
+                              }
+                        });
+
+                    }
+                    container.appendChild(download_button);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<h1>
+    BestPerformanceHit Client
+</h1>
+<h4>Insert number of resources you want to download:</h4>
+    <input type="text" class="form-control" placeholder="Number of resources"  id="member" name="member" value=""><br />
+<button type="button" class="btn btn-default navbar-btn" onclick="addFields()">Generate inputs</button>
+<!--<a href="#" id="filldetails" >Fill Details</a>-->
+    <div id="container"/>
+
+<script>
+    $.ajax({
+      url: "/test",
+      <!--data: {-->
+        <!--zipcode: 97201-->
+      <!--},-->
+      success: function( data ) {
+        <!--$( "#weather-temp" ).html( "<strong>" + data + "</strong> degrees" );-->
+        console.log("hej mendo");
+        <!--alert("Hello! I am an alert box!!");-->
+      }
+    });
+</script>
+</body>

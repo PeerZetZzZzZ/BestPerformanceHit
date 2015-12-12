@@ -10,7 +10,7 @@ from utils import Utils
 class FileDownloadMonitor(Thread):
 
     def run(self):
-        schedule.every(30).seconds.do(download_files)
+        schedule.every(30).minutes.do(download_files)
         while True:
             schedule.run_pending()
             time.sleep(1)

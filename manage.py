@@ -3,6 +3,7 @@ import os
 import sys
 import threading
 
+from flask import Flask
 from flask_script import Manager, Server
 
 from FileDownloadMonitor import FileDownloadMonitor
@@ -10,7 +11,6 @@ from FileDownloadMonitor import FileDownloadMonitor
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from bestperformancehit import app
-
 manager = Manager(app)
 
 # Turn on debugger by default and reloader

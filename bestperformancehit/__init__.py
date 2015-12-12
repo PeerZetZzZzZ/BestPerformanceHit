@@ -3,7 +3,7 @@ from flask_mongoengine import MongoEngine
 
 from FileDownloadMonitor import FileDownloadMonitor
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 app.config["MONGODB_SETTINGS"] = {'DB': "my_bestperformancehit"}
 app.config["SECRET_KEY"] = "KeepThisS3cr3t"
 

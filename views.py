@@ -1,4 +1,6 @@
-from flask import Blueprint, render_template, request, make_response
+import json
+
+from flask import Blueprint, render_template, request, make_response, url_for
 from flask.views import MethodView
 # from utils import fileSize
 from FileDownloadMonitor import FileDownloadMonitor
@@ -25,6 +27,17 @@ def addprovider_func(name=None):
         file_size = Utils.fileSize(filepath)
         FileProvider.add_new_file_provider(hostname, filepath, file_size)
     return make_response(render_template('provider_added.html'), 200)
+
+@app.route('/client')
+def render_client(name=None):
+    return make_response(render_template('performance_hit_client/client.html'), 200)
+
+@app.route('/test', methods=['POST'])
+def addprovider_func2(name=None):
+    received_data = json.loads(request.data.data.decode())
+    print("mam dane do testu")
+    print(received_data)
+    return make_response("siemka", 200)
 
 @app.before_first_request
 def start_download_services():
