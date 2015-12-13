@@ -1,12 +1,8 @@
 # Set the path
-import os
 import sys
-import threading
 
-from flask import Flask
+import os
 from flask_script import Manager, Server
-
-from FileDownloadMonitor import FileDownloadMonitor
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 

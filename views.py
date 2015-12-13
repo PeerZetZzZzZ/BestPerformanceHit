@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, render_template, request, make_response, url_for
+from flask import Blueprint, render_template, request, make_response
 from flask.views import MethodView
 # from utils import fileSize
 from FileDownloadMonitor import FileDownloadMonitor
