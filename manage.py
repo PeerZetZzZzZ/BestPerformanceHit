@@ -6,7 +6,7 @@ from flask_script import Manager, Server
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from bestperformancehit import app
+from bestperformancehit35 import app
 manager = Manager(app)
 
 # Turn on debugger by default and reloader

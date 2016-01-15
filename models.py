@@ -1,6 +1,6 @@
 import datetime
 
-from bestperformancehit import db
+from bestperformancehit35 import db
 
 
 class FileDownload(db.EmbeddedDocument):
@@ -30,13 +30,16 @@ class FileProvider(db.Document):
         file_provider.save()
         # FileProvider.objects(hostname="net23").delete()
 
+    def remove_provider(hostname):
+        FileProvider.objects(hostname=hostname).delete()
+
     def get_average_download_time(self):
         total_time = 0.0
         counter = 0
         for download in self.downloads:
             total_time += float(download.downloadtime)
-            counter +=1
-        if counter > 0 :
+            counter += 1
+        if counter > 0:
             return round(total_time/counter, 4)
         return 0
 
@@ -47,3 +50,20 @@ class FileProvider(db.Document):
         'allow_inheritance': True,
         'ordering': ['-created_at']
     }
+
+class SystemConfiguration(db.Document):
+    created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
+    download_interval = db.IntField()
+
+    def save_download_interval(download_interval):
+        if SystemConfiguration.objects.count() == 1:
+            if download_interval > 1 and download_interval <= 60:
+             SystemConfiguration.objects(0).update_one(download_interval=download_interval)
+        else:
+            system_configuration_singleton = SystemConfiguration(download_interval=download_interval)
+            system_configuration_singleton.save()
+
+    def get_save_download_interval(*args):
+         configurations = SystemConfiguration.objects.all()
+         for configuration in configurations:
+            return configuration.download_interval

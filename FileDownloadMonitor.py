@@ -1,16 +1,22 @@
 import os
-import threading
 import time
-from string import Formatter
 from threading import Thread
 
 import schedule
+
 from utils import Utils
+
 
 class FileDownloadMonitor(Thread):
 
+    file_download_interval = None
+
+    def __init__(self, file_download_interval):
+        super(FileDownloadMonitor, self).__init__()
+        self.file_download_interval = file_download_interval
+
     def run(self):
-        schedule.every(30).minutes.do(download_files)
+        schedule.every(self.file_download_interval).seconds.do(download_files)
         while True:
             schedule.run_pending()
             time.sleep(1)

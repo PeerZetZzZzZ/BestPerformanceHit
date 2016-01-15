@@ -4,6 +4,7 @@ import requests
 import time
 
 class Utils:
+
     def downloadFile(url, directory) :
       localFilename = url.split('/')[-1]
       r = requests.get(url, stream=True)

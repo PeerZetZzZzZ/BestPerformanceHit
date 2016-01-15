@@ -20,8 +20,28 @@
             <td>{{file_provider.filesize}} kB</td>
             <td>{{file_provider.get_downloads_counter()}}</td>
             <td>{{file_provider.get_average_download_time()}} s</td>
+              <td><button class="btn btn-danger" onclick="removeProvider('{{file_provider.hostname}}')" >Remove </button></td>
+
           </tr>
     {% endfor %}
         </tbody>
       </table>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function removeProvider(hostname) {
+        var remove_provider_input_data = new Object();
+        remove_provider_input_data.hostname = hostname;
+        console.log("WYSLAM TAKIEGO SKURWLA: "+JSON.stringify(remove_provider_input_data));
+        $.ajax({
+          type: "POST",
+          url: "/removeprovider",
+          data: JSON.stringify(remove_provider_input_data),
+          contentType: "application/json",
+          success: function() {
+            location.reload();
+          }
+        });
+        <!--console.log("KON DATA" + hostname);-->
+    }
+</script>
 {% endblock %}
